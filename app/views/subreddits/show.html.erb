@@ -1,0 +1,23 @@
+<h1>Subreddit name:<%= @subreddit.sub_name %></h1>
+<p>Description: <%= @subreddit.description %></p>
+<p>Owner:<%= @subreddit.user.name %></p>
+
+<p>Posts:</p>
+<ul>
+    <% @subreddit.posts.each do |post| %>
+        <li><%= link_to "#{post.title}", "http://#{post.url}" %> - by <%= link_to "#{post.user.name}", profile_path(post.user.name) %> - <%= link_to "Comments", subreddit_post_comments_path(@subreddit, post.id)%>
+        <% if current_user == post.user %>
+            <%= link_to "Delete Post", subreddit_post_path(@subreddit, post.id), method: :delete %>
+        <% end %></li>
+    <% end %>
+</ul>
+
+<%= link_to "Front", root_path %>
+<% if user_signed_in? %>
+    <%= link_to 'Profile', profile_path(current_user.name) %>
+    <%= link_to 'Log out', destroy_user_session_path, method: :delete %>
+    <%= link_to 'New Post', new_subreddit_post_path(@subreddit) %>
+    <% if current_user == @subreddit.user %>
+        <%= link_to 'Delete Subreddit', subreddit_path(@subreddit), method: :delete, data: { confirm: "Are you sure?" } %>
+    <% end %>
+<% end %>

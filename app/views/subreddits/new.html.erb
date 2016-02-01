@@ -1,0 +1,30 @@
+<h2>Create a new Subreddit</h2>
+
+<%= form_for(@subreddit) do |f| %>
+    <% if @subreddit.errors.any? %>
+      <div id="error_explanation">
+        <div class="alert alert-danger">
+          The form contains <%= pluralize(@subreddit.errors.count, "error") %>.
+        </div>
+        <ul>
+        <% @subreddit.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+  
+  <div class="field">
+    <%= f.label :sub_name %><br />
+    <%= f.text_field:sub_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description, size: "30x10" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Create new Subreddit" %>
+  </div>
+<% end %>

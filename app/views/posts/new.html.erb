@@ -1,0 +1,20 @@
+<%= form_for [@subreddit, @subreddit.posts.build] do |f| %>
+
+    <%= render 'shared/error_messages', object: f.object %>
+  
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div> 
+
+  <div class="field">
+    <%= f.label :url %><br />
+    <%= f.text_field :url %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Create new Post" %>
+  </div>
+<% end %>
+
+<%= link_to "Back", subreddit_path(@subreddit) %>
